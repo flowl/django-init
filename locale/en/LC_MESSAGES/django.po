@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-03 03:06+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps/Application/config.py:17 apps/Application/config.py:18
+#: apps/Application/config.py:19
+msgid "django-init"
+msgstr ""
+
+#: apps/Application/models/custom_user.py:16
+msgid "User"
+msgstr ""
+
+#: apps/Application/models/custom_user.py:17
+msgid "Users"
+msgstr ""
+
+#: apps/Application/models/custom_user.py:24
+msgid "Email"
+msgstr ""
+
+#: apps/Application/models/custom_user.py:26
+msgid "Language"
+msgstr ""
+
+#: apps/Application/models/custom_user.py:34
+msgid "Displayname"
+msgstr ""
+
+#: apps/Application/models/custom_user.py:42
+msgid "Groups"
+msgstr ""
+
+#: apps/Application/settings.py:95
+msgid "English"
+msgstr ""
+
+#: templates/frame/base.html:6
+msgid "Page title"
+msgstr ""
+
+#: templates/sites/hello_world.html:6
+#, python-format
+msgid "Hello, %(greet_name)s!"
+msgstr ""
+
+#: templates/sites/index.html:6
+msgid "Welcome!"
+msgstr ""

@@ -1,0 +1,12 @@
+# IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Meta caches
+__pycache__
+*.pyc
+venv/
+
+# Security
+id_*

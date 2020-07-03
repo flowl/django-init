@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% load static %}
+<html>
+<head>
+    <title>{{ page_title|default:_('Page title') }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/django.css' %}">
+</head>
+<body>
+
+{% block 'content' %}{% endblock %}
+
+<p>
+    `context` variable `display_colored_logo`: {{ disable_colored_logo|default:'None' }}
+</p>
+<!-- script src="{% static 'scripts/base.js' %}"></script> -->
+</body>
+</html>

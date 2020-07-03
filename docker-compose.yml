@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+  web:
+    build: .
+    command: sh -c 'bin/wait-for mysql:3306 -- python3 manage.py runserver 0.0.0.0:8022'
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - 8022:8022
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.djangoinit.rule=Host(`djangoinit.localhost`)"
+      - "traefik.http.routers.djangoinit.entrypoints=web"
+      - "traefik.http.services.djangoinit.loadbalancer.server.port=8022"
+    container_name: djangoinit
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mariadb:10.5-focal
+    restart: always
+    volumes:
+      - ./data/mysql/data/:/var/lib/mysql/:delegated
+    environment:
+      MYSQL_DATABASE: django
+      MYSQL_USER: django
+      MYSQL_PASSWORD: django-password
+      MYSQL_ALLOW_EMPTYPASSWORD: "false"
+      MYSQL_RANDOM_ROOT_PASSWORD: "true"
+      # MYSQL_ROOT_PASSWORD: root
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
+
+networks:
+  default:
+    external:
+      name: web

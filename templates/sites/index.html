@@ -1,0 +1,10 @@
+{% extends 'frame/base.html' %}
+
+{% load i18n %}
+
+{% block 'content' %}
+<h1>{% trans 'Welcome!' %}</h1>
+<p>
+    <a href="{% url 'hello_world' %}">Continue</a>
+</p>
+{% endblock %}
