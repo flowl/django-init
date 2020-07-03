@@ -9,9 +9,12 @@
 This template is preconfigured to work with `docker-compose` out of the box ([see docker-compose.yml](docker-compose.yml)).
 For best performance, the executed code is mounted host authoritive (`cached`) while the MySQL data files are mounted container authoritive (`delegated`). 
 
+    $ git clone https://github.com/flowl/django-init
+    $ cd django-init/
     $ make build
     
 **Go to [`settings.py`](apps/Application/settings.py) and add a long random string to `SECRET_KEY`.**
+
     
 Initial migrations:
     
