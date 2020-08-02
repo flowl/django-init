@@ -4,7 +4,7 @@ services:
   web:
     build: .
     command: sh -c 'bin/wait-for mysql:3306 -- python3 manage.py runserver 0.0.0.0:8022'
-    restart: always
+    restart: unless-stopped
     volumes:
       - .:/app
     ports:
@@ -20,7 +20,7 @@ services:
 
   mysql:
     image: mariadb:10.5-focal
-    restart: always
+    restart: unless-stopped
     volumes:
       - ./data/mysql/data/:/var/lib/mysql/:delegated
     environment:
