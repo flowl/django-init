@@ -12,7 +12,10 @@
 {% block 'content' %}{% endblock %}
 
 <p>
-    `context` variable `display_colored_logo`: {{ disable_colored_logo|default:'None' }}
+    `context` variable `public_port`: {{ public_port|default:'None' }}
+</p>
+<p>
+    `context` variable `app_port`: {{ app_port|default:'None' }}
 </p>
 <!-- script src="{% static 'scripts/base.js' %}"></script> -->
 </body>

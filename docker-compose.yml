@@ -3,17 +3,18 @@ version: '3.1'
 services:
   web:
     build: .
-    command: sh -c 'bin/wait-for mysql:3306 -- python3 manage.py runserver 0.0.0.0:8022'
+    command: sh -c 'bin/wait-for mysql:3306 -- python3 manage.py runserver 0.0.0.0:${APP_PORT}'
     restart: unless-stopped
+    env_file: .env
     volumes:
       - .:/app
     ports:
-      - 8022:8022
+      - ${PUBLIC_PORT}:${APP_PORT}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.djangoinit.rule=Host(`djangoinit.localhost`)"
       - "traefik.http.routers.djangoinit.entrypoints=web"
-      - "traefik.http.services.djangoinit.loadbalancer.server.port=8022"
+      - "traefik.http.services.djangoinit.loadbalancer.server.port=$$PUBLIC_PORT"
     container_name: djangoinit
     depends_on:
       - mysql

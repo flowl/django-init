@@ -1,4 +1,4 @@
-from django.conf import settings
+
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -6,6 +6,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+from apps.Application import settings
 from apps.Application.views import HtmlView
 
 # from apps.OtherApp.urls import urlpatterns as other_app_urlpatterns
@@ -14,9 +15,12 @@ from apps.Application.views import HtmlView
 # If you don't want to use different language prefixes, remove the `i18n_patterns()` call
 
 urlpatterns = [] + i18n_patterns(
-    path('', HtmlView.as_view(template_name='sites/index.html', extra_context={'disable_colored_logo': True}),
+    path('', HtmlView.as_view(template_name='sites/index.html',
+                              extra_context={'public_port': settings.env('PUBLIC_PORT'),
+                                             'app_port': settings.env('APP_PORT')}),
          name='start'),
-    path('hello-world/', TemplateView.as_view(template_name='sites/hello_world.html', extra_context={'greet_name': 'world'}),
+    path('hello-world/',
+         TemplateView.as_view(template_name='sites/hello_world.html', extra_context={'greet_name': 'world'}),
          name='hello_world'),
 
     path('i18n/', include('django.conf.urls.i18n')),

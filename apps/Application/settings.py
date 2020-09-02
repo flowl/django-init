@@ -1,13 +1,20 @@
 import os
 
+import environ
 from django.utils.translation import gettext_lazy as _
 from unipath import Path
 
-SECRET_KEY = ''
-DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '192.168.*', '*']
-
 BASE_DIR = Path(__file__).parent.parent.parent
+
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+environ.Env.read_env(env_file=BASE_DIR.child('.env'))
+
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 ROOT_URLCONF = 'apps.Application.urls'
 
@@ -73,7 +80,6 @@ DATABASES = {
     }
 }
 
-
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
@@ -103,13 +109,10 @@ TIME_ZONE = 'Europe/Berlin'
 # TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
-
 
 STATICFILES_DIRS = (
     BASE_DIR.child('assets'),
@@ -122,12 +125,12 @@ LOCALE_PATHS = [
     BASE_DIR.child('locale'),
 ]
 
-
 MEDIA_ROOT = BASE_DIR.child('data').child('media')
 MEDIA_URL = '/media/'
 
+# TODO Put in .env
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.example.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'noreply@example.com'
@@ -137,17 +140,9 @@ DEFAULT_FROM_EMAIL = 'noreply@example.com'
 EMAIL_USE_SSL = True
 # EMAIL_USE_TLS = True
 
-# @todo Is this in use?
+# TODO Is this in use?
 ADMINS = [
     ("Administrator", "staff@example.com")
 ]
 
 AUTH_USER_MODEL = 'Application.CustomUser'
-
-SETTINGS_EXPORT = [
-    'ENV',
-    'EMAIL_HOST_USER',
-    'AUTH_USER_MODEL',
-    'DEFAULT_CONTACT_PERSON',
-    'LANGUAGES'
-]

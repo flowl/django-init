@@ -1,12 +1,16 @@
-.PHONY: all build start stop restart clean bash log migrations migrate makemessages compilemessages
+.PHONY: all build start stop restart clean bash log migrations migrate makemessages compilemessages collectstatic cachetable superuser
 
+# TODO
 #CONTAINER=$(basename `pwd` | sed "s/[^[:alnum:]]//g")
 CONTAINER=djangoinit
 
+# https://docs.docker.com/compose/reference/build/
 build:
-	docker-compose build --force-rm
+	docker-compose build --parallel
+	# --force-rm
 	# --no-cache
 
+# https://docs.docker.com/engine/reference/commandline/exec/
 bash:
 	docker exec -it ${CONTAINER} /bin/bash
 
@@ -32,7 +36,16 @@ migrate:
 	docker exec -it ${CONTAINER} python manage.py migrate
 
 messages:
-	docker exec -it ${CONTAINER} python manage.py makemessages
+	docker exec -it ${CONTAINER} python manage.py makemessages -f venv/
 
 compilemessages:
-	docker exec -it ${CONTAINER} python manage.py compilemessages
+	docker exec -it ${CONTAINER}} python manage.py compilemessages
+
+collectstatic:
+	docker exec -it ${CONTAINER} python manage.py collectstatic
+
+cachetable:
+	docker exec -it ${CONTAINER} python manage.py createcachetable
+
+superuser:
+	docker exec -it ${CONTAINER} python manage.py createsuperuser

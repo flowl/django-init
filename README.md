@@ -16,6 +16,7 @@
 ### Features
 
 - Custom default User ([Django 3 implementation](https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#substituting-a-custom-user-model))
+- .env file support (https://github.com/joke2k/django-environ)
 - The username is the email address (How do you like this?)
 - Preconfigured settings for SMTP, MySQL, sqlite3, caching, ...
 - i18n enabled and substituted `datetime.now()` by `timezone.now()`

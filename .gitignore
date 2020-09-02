@@ -10,3 +10,4 @@ venv/
 
 # Security
 id_*
+.env
