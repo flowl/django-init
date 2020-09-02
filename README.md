@@ -32,25 +32,23 @@ For best performance, the executed code is mounted host authoritive (`cached`) w
     $ cd django-init/
     $ make build
     
-**Go to [`settings.py`](apps/Application/settings.py) and add a long random string to `SECRET_KEY`.**
+Copy the `.env.dist` file to `.env` and set a random token for `SECRET_KEY`. 
     
-Initial migrations:
+Apply initial migrations:
     
     $ make migrate
     
 Create a superuser and the cache table:
 
-    $ make shell
-    $ python manage.py createcachetable
-    $ python manage.py createsuperuser
-    $ exit
+    $ make cachetable
+    $ make superuser
 
 Start:
     
     $ make start
     $ make log
     
-Then visit [`http://djangoinit.localhost:8022`](http://djangoinit.localhost:8022).
+Visit [`http://localhost:8070`](http://localhost:8070).
 
 If you have [`traefik`](https://docs.traefik.io/) installed, you can also go to [`http://djangoinit.localhost`](http://djangoinit.localhost) straight.
 
@@ -59,14 +57,14 @@ If you have [`traefik`](https://docs.traefik.io/) installed, you can also go to 
 
 ## Settings
 
-Please edit [`apps/Application/settings.py`](apps/Application/settings.py), especially the following:
+Please edit [`apps/Application/settings.py`](apps/Application/settings.py) and 
+[`.env`](.env) respectively:
 
 - `SECRET_KEY`, `AUTH_PASSWORD_VALIDATORS`
 - `DEBUG`, `ALLOWED_HOSTS`
 - `DATABASES` (MySQL container and sqlite3)
 - `CACHES` (using MySQL)
 - `EMAIL_BACKEND` and SMTP settings
-- `USE_I18N`, `USE_L10N`, `USE_TZ`
 
 ## Hints
 
@@ -80,8 +78,6 @@ https://github.com/flowl/django-init
 
 
 Maintained by [Daniel Wendler](https://danielwendler.dev).
-
-For development purpose.
 
 
 <small>Distributed under the MIT License.</small>
